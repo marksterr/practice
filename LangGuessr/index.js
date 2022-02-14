@@ -1,15 +1,12 @@
-import {franc, francAll} from 'franc'
+import {franc} from 'franc';
 import langs from 'langs';
-const arg = process.argv[2];
-const errormsg = 'Could not match a language. Please try again with a larger sample';
-if (arg != undefined){
-  const langCode = franc(arg);
-  const language = langs.where('3', langCode);
-  try{
-    console.log(language.name);
-  } catch {
-    console.log(errormsg);
-  }
+import colors from 'colors';
+const input = process.argv[2];
+const langCode = franc(input);
+if(langCode === 'und'){
+  console.log("SORRY COULDN'T FIGURE IT OUT! TRY WITH MORE SAMPLE TEXT!".red)
 } else {
-  console.log(errormsg);
+  const language = langs.where('3', langCode);
+  console.log(`Our best guess is: ${language.name}`.green);
 }
+
